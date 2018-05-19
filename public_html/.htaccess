@@ -1,0 +1,40 @@
+RewriteEngine On
+RewriteCond %{ENV:REDIRECT_STATUS} . [OR]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+ErrorDocument 404 /public_html/404.php
+RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
+RewriteRule ^mua-hang-my$ ?action=transport
+RewriteRule ^dong-ho$ ?action=watches
+
+RewriteRule ^dong-ho/([a-zA-Z0-9_-]+)-([0-9]+)$ ?action=product_detail&alias=$1&id=$2
+
+RewriteRule ^dong-ho/gioi-tinh/([\w-]+)/?$ ?action=watches&filter=gioi-tinh&sex=$1
+RewriteRule ^dong-ho/loc/([\w-]+)/?$ ?action=watches&filter=custom-view&ct=$1
+RewriteRule ^dong-ho/hang/([\w-]+)/?$ ?action=watches&filter=hang&name=$1
+RewriteRule ^dong-ho/gia/([\w-]+)/?$ ?action=watches&filter=gia&from=$1
+
+RewriteRule ^dong-ho-nam/hang/([\w-]+)/?$ ?action=sex_pages&sex=nam&hang=$1
+RewriteRule ^dong-ho-nam/gia/([\w-]+)/?$ ?action=sex_pages&sex=nam&gia=$1
+RewriteRule ^dong-ho-nam/loc/([\w-]+)/?$ ?action=sex_pages&sex=nam&loc=$1
+RewriteRule ^dong-ho-nam$ ?action=sex_pages&sex=nam
+
+RewriteRule ^dong-ho-nu/hang/([\w-]+)/?$ ?action=sex_pages&sex=nu&hang=$1
+RewriteRule ^dong-ho-nu/gia/([\w-]+)/?$ ?action=sex_pages&sex=nu&gia=$1
+RewriteRule ^dong-ho-nu/loc/([\w-]+)/?$ ?action=sex_pages&sex=nu&loc=$1
+RewriteRule ^dong-ho-nu$ ?action=sex_pages&sex=nu
+
+RewriteRule ^dong-ho-unisex/hang/([\w-]+)/?$ ?action=sex_pages&sex=unisex&hang=$1
+RewriteRule ^dong-ho-unisex/gia/([\w-]+)/?$ ?action=sex_pages&sex=unisex&gia=$1
+RewriteRule ^dong-ho-unisex/loc/([\w-]+)/?$ ?action=sex_pages&sex=unisex&loc=$1
+RewriteRule ^dong-ho-unisex$ ?action=sex_pages&sex=unisex
+
+RewriteRule ^admin$ admin.php
+RewriteRule ^cart$ ?action=shopping_cart
+RewriteRule ^tim-kiem/([^.]+)/([^.]+)/?$ ?action=search&ma=$1&tu-khoa=$2  [QSA,L]
+RewriteRule ^checkout$ ?action=shopping_cart&id=checkout
+RewriteRule ^mua-hang$ ?action=shopping_cart&id=buy_it
+RewriteRule ^giup-do$ ?action=help
+RewriteRule ^admin/san-pham.html$ admin.php?a=admin_product [QSA,L]
+
